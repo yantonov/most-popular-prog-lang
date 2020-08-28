@@ -1,13 +1,11 @@
-FROM yantonov/anaconda3:2020.07
+FROM python:3.8-slim-buster
 
 MAINTAINER Yury Antonov <yantonov@yandex.ru>
 
-RUN conda config --add channels conda-forge
+RUN pip install --upgrade pip
+ADD files/* /root/
+RUN pip install -r /root/requirements.txt
 
-RUN apt-get update && \
-    # build-essential (gcc in particular) is required for twisted
-    apt-get install -y build-essential && \
-    apt-get clean
+WORKDIR /src
 
-ADD files/* /
-RUN pip install -r /requirements.txt
+ENTRYPOINT [ "/root/init.sh" ]
