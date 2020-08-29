@@ -37,7 +37,6 @@ else:
     chart = (
         alt.Chart(data)
         .mark_line()
-        #.mark_area(opacity=0.3)
         .encode(
             x="Date:T",
             y=alt.Y("Popularity", stack=None),
